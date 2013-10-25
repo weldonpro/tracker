@@ -1,0 +1,15 @@
+{
+    "name": "weldon/tracker",
+    "description": "internal tracker",
+    "authors": [
+        {
+            "name": "Eugine Terentev",
+            "email": "eugine@terentev.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "dev-master",
+        "yiisoft/yii2-composer": "dev-master"
+    }
+}

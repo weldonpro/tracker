@@ -1,0 +1,7 @@
+/app/runtime
+/web/assets
+/vendor
+
+.idea
+/composer.phar
+/composer.lock
