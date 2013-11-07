@@ -3,8 +3,8 @@ if(isset($_SERVER['APP_ENV'])){
     defined('YII_DEBUG') or define('YII_DEBUG', true);
     defined('YII_ENV') or define('YII_ENV', $_SERVER['APP_ENV']);
 } else {
-    defined('YII_DEBUG') or define('YII_DEBUG', false);
-    defined('YII_ENV') or define('YII_ENV', 'production');
+    defined('YII_DEBUG') or define('YII_DEBUG', true);
+    defined('YII_ENV') or define('YII_ENV', 'local');
 }
 
 require(__DIR__ . '/../vendor/autoload.php');

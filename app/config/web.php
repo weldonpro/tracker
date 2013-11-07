@@ -12,7 +12,7 @@ $config = [
             'class' => 'app\modules\dashboard\Module',
         ],
     ],
-    'extensions' => require(__DIR__ . '/../../vendor/yii-extensions.php'),
+    'extensions' => require(__DIR__ . '/../../vendor/yiisoft/extensions.php'),
 	'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
