@@ -94,7 +94,7 @@ class Task extends \yii\db\ActiveRecord
 	/**
 	 * @return \yii\db\ActiveRelation
 	 */
-	public function getTaskMessages()
+	public function getMessages()
 	{
 		return $this->hasMany(Task::className(), ['task_id' => 'id']);
 	}
