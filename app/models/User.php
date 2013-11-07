@@ -66,9 +66,9 @@ class User extends ActiveRecord implements IdentityInterface
 	 * @param string $username
 	 * @return null|User
 	 */
-	public static function findByUsername($username)
+	public static function findByEmail($email)
 	{
-		return static::find(['username' => $username, 'status' => static::STATUS_ACTIVE]);
+		return static::find(['email' => $email, 'status' => static::STATUS_ACTIVE]);
 	}
 
 	/**

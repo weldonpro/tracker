@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\config;
+namespace app\config\bundles;
 
 use yii\web\AssetBundle;
 
@@ -18,13 +18,14 @@ class AppAsset extends AssetBundle
 	public $basePath = '@webroot';
 	public $baseUrl = '@web';
 	public $css = [
+        'vendor/bootstrap/css/bootstrap.min.css',
 		'css/style.css',
-        'vendor/font-awesome/css/font-awesome.min.css'
+        'vendor/font-awesome/css/font-awesome.min.css',
 	];
-	public $js = [
-	];
+    public $js = [
+        'vendor/bootstrap/js/bootstrap.min.js',
+    ];
 	public $depends = [
 		'yii\web\YiiAsset',
-		'yii\bootstrap\BootstrapAsset',
 	];
 }

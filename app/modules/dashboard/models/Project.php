@@ -1,6 +1,7 @@
 <?php
 
-namespace app\models;
+namespace app\modules\dashboard\models;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "project".
@@ -32,8 +33,9 @@ class Project extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['title, description, user_id, create_time', 'required'],
+			['title, description', 'required'],
 			['description', 'string'],
+            ['user_id', 'default', 'value'=>\Yii::$app->user->id],
 			['user_id', 'integer'],
 			['create_time, update_time', 'safe'],
 			['title', 'string', 'max' => 512]
@@ -54,6 +56,12 @@ class Project extends \yii\db\ActiveRecord
 			'update_time' => 'Update Time',
 		];
 	}
+
+    public function behaviors(){
+        return array(
+            'timestamp' => ['class' => 'yii\behaviors\AutoTimestamp', 'timestamp'=>new Expression('NOW()')],
+        );
+    }
 
 	/**
 	 * @return \yii\db\ActiveRelation

@@ -1,6 +1,7 @@
 {
     "name": "weldon/tracker",
     "description": "internal tracker",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Eugine Terentev",
@@ -10,6 +11,8 @@
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "dev-master",
-        "yiisoft/yii2-composer": "dev-master"
+        "yiisoft/yii2-bootstrap": "dev-master",
+        "yiisoft/yii2-debug": "dev-master",
+        "yiisoft/yii2-gii": "dev-master"
     }
 }

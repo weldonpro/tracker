@@ -1,9 +1,17 @@
 <?php
-$params = require(__DIR__ . '/params.php');
+use yii\base\Application;
+
 $config = [
+    'name'=>'Наш трекер',
 	'id' => 'bootstrap',
     'basePath' => dirname(__DIR__),
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'language'=>'ru',
+    'modules' => [
+        'dashboard' => [
+            'class' => 'app\modules\dashboard\Module',
+        ],
+    ],
     'extensions' => require(__DIR__ . '/../../vendor/yii-extensions.php'),
 	'components' => [
         'db' => [
@@ -16,6 +24,13 @@ $config = [
 		'request' => [
 			'enableCsrfValidation' => true,
 		],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                ],
+            ],
+        ],
 		'cache' => [
 			'class' => 'yii\caching\FileCache',
 		],
@@ -35,10 +50,11 @@ $config = [
 			],
 		],
 	],
-	'params' => $params,
+    'on beforeRequest'=>['app\components\events\BeforeRequestHandler', 'handle'],
+	'params' => require(__DIR__ . '/params.php'),
 ];
 
-if (YII_ENV_DEV) {
+if (YII_ENV == 'local') {
 	$config['preload'][] = 'debug';
 	$config['modules']['debug'] = 'yii\debug\Module';
 	$config['modules']['gii'] = 'yii\gii\Module';
