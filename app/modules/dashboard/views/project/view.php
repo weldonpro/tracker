@@ -17,9 +17,16 @@ $this->title = $project->title;
     <h1><?= $project->title ?></h1>
     <p><?= $project->description ?></p>
 </div>
-<h2>Задачи</h2>
+<h2>
+    <? echo Yii::t('dashboard', 'Задачи') ?>
+    <small>/
+        <?= Html::a(Yii::t('dashboard', 'все'), $this->context->createUrl('view', array('id'=>$project->id))) ?>,
+        <?= Html::a(Yii::t('dashboard', 'открыто'), $this->context->createUrl('view', array('id'=>$project->id, 'status'=>'open'))) ?>,
+        <?= Html::a(Yii::t('dashboard', 'закрыто'), $this->context->createUrl('view', array('id'=>$project->id, 'status'=>'closed'))) ?>
+    </small>
+</h2>
 <div class="table-responsive">
-    <table class="table table-hover table-striped tablesorter">
+    <table class="table table-hover table-bordered table-striped tablesorter">
         <thead>
         <tr>
             <th class="header">#</th>
