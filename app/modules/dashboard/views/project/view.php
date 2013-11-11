@@ -9,12 +9,15 @@ use yii\widgets\DetailView;
  */
 
 $this->title = $project->title;
-$this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div>
     <a href="<? echo Yii::$app->urlManager->createUrl('dashboard/task/manage', array('project_id'=>$project->id)) ?>" class="btn btn-primary"><? echo Yii::t('dashboard', 'Новая задача') ?></a>
 </div>
+<div>
+    <h1><?= $project->title ?></h1>
+    <p><?= $project->description ?></p>
+</div>
+<h2>Задачи</h2>
 <div class="table-responsive">
     <table class="table table-hover table-striped tablesorter">
         <thead>

@@ -22,7 +22,7 @@ class ProjectViewAction extends Action{
             ->join('LEFT JOIN', 'task_category as task_category', 'category_id = task_category.id')
             ->andWhere('task_category.project_id = :project_id')
             ->params(array(':project_id'=>$id))
-            ->orderBy('update_time DESC')
+            ->orderBy('update_time DESC, id DESC')
             ->all();
         echo $this->controller->render('view', array('project'=>$project, 'tasks'=>$tasks));
     }

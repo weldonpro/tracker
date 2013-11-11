@@ -21,7 +21,7 @@ use yii\helpers\ArrayHelper;
 
 		<?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-		<?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(TaskCategory::find()->where(array('project_id'=>$project_id))->all(), 'id', 'title')) ?>
+		<?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map($categories, 'id', 'title')) ?>
 
 		<?= $form->field($model, 'status')->dropDownList(Task::getStatuses()) ?>
 

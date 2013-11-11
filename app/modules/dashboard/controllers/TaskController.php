@@ -3,6 +3,7 @@
 namespace app\modules\dashboard\controllers;
 
 use app\modules\dashboard\models\TaskMessage;
+use app\modules\dashboard\models\TaskCategory;
 use app\modules\dashboard\models\Task;
 use app\modules\dashboard\models\search\TaskSearch;
 use yii\data\ActiveDataProvider;
@@ -75,18 +76,28 @@ class TaskController extends Controller
 	{
         if(!$id){
             $model = new Task;
+            $model->status = Task::STATUS_NEW;
         }else{
             $model = $this->findModel($id);
         }
 
 		if ($model->load($_POST) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
-		} else {
-			return $this->render('form', [
-				'model' => $model,
-                'project_id'=>$project_id
-			]);
 		}
+
+        if(!$model->isNewRecord){
+            $project_id = $model->category->project_id;
+        }
+
+        $categories = TaskCategory::find()->where(array('project_id'=>$project_id))->all();
+
+        return $this->render('form', [
+            'model' => $model,
+            'project_id'=>$project_id,
+            'categories'=>$categories
+
+        ]);
+
 	}
 
 
