@@ -52,34 +52,36 @@ class ProjectController extends Controller
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 * @return mixed
 	 */
-	public function actionCreate()
+	public function actionManage($id = false)
 	{
-		$model = new Project;
+        if(!$id){
+		    $model = new Project;
+        } else {
+            $model = $this->findModel($id);
+        }
+
+        $query = TaskCategory::find()->where(array('project_id'=>$id));
+
+        $categoryModel = new TaskCategory;
+
+        if($categoryModel->load($_POST)){
+            $categoryModel->project_id = $id;
+            if($categoryModel->save()){
+                $this->refresh('categories');
+            }
+        }
+
+        $categoriesDataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
 		if ($model->load($_POST) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
-			return $this->render('create', [
+			return $this->render('form', [
 				'model' => $model,
-			]);
-		}
-	}
-
-	/**
-	 * Updates an existing Project model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id
-	 * @return mixed
-	 */
-	public function actionUpdate($id)
-	{
-		$model = $this->findModel($id);
-
-		if ($model->load($_POST) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->id]);
-		} else {
-			return $this->render('update', [
-				'model' => $model,
+                'categoryModel'=>$categoryModel,
+                'categoriesDataProvider'=>$categoriesDataProvider
 			]);
 		}
 	}

@@ -2,7 +2,7 @@
 
 namespace app\modules\dashboard\controllers;
 
-use app\models\TaskMessage;
+use app\modules\dashboard\models\TaskMessage;
 use app\modules\dashboard\models\Task;
 use app\modules\dashboard\models\search\TaskSearch;
 use yii\data\ActiveDataProvider;
@@ -52,8 +52,11 @@ class TaskController extends Controller
         $messages = TaskMessage::find()->where(array('task_id'=>$id))->all();
         $newMessage = new TaskMessage();
 
-        if ($newMessage->load($_POST) && $newMessage->save()) {
-            return $this->refresh();
+        if ($newMessage->load($_POST)) {
+            $newMessage->task_id = $id;
+            if($newMessage->save()){
+                return $this->refresh();
+            }
         }
 
 		return $this->render('view', [
@@ -68,37 +71,24 @@ class TaskController extends Controller
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 * @return mixed
 	 */
-	public function actionCreate()
+	public function actionManage($id = false, $project_id = false)
 	{
-		$model = new Task;
+        if(!$id){
+            $model = new Task;
+        }else{
+            $model = $this->findModel($id);
+        }
 
 		if ($model->load($_POST) && $model->save()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
-			return $this->render('create', [
+			return $this->render('form', [
 				'model' => $model,
+                'project_id'=>$project_id
 			]);
 		}
 	}
 
-	/**
-	 * Updates an existing Task model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id
-	 * @return mixed
-	 */
-	public function actionUpdate($id)
-	{
-		$model = $this->findModel($id);
-
-		if ($model->load($_POST) && $model->save()) {
-			return $this->redirect(['view', 'id' => $model->id]);
-		} else {
-			return $this->render('update', [
-				'model' => $model,
-			]);
-		}
-	}
 
 	/**
 	 * Deletes an existing Task model.

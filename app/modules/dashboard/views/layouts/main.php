@@ -43,7 +43,7 @@ AppAsset::register($this);
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
-                        <? foreach(Project::find()->all() as $project): ?>
+                        <? foreach($this->context->module->availableProjects as $project): ?>
                             <li>
                                 <a href="<?= Yii::$app->urlManager->createUrl('dashboard/project/view', array('id'=>$project->id)) ?>">
                                     <i class="fa fa-tasks"></i> <?= $project->title ?>
@@ -57,17 +57,18 @@ AppAsset::register($this);
                     <ul class="nav navbar-nav navbar-right navbar-user">
                         <li class="dropdown messages-dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-envelope"></i> Проекты <span class="badge">7</span>
+                                <i class="icon-envelope"></i> <? echo Yii::t('dashboard', 'Проекты') ?> <span class="badge"><?= count($this->context->module->availableProjects) ?></span>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="<?= Yii::$app->urlManager->createUrl('dashboard/project/create') ?>">Создать проект</a></li>
+                                <li><a href="<?= Yii::$app->urlManager->createUrl('dashboard/project/manage') ?>">Создать проект</a></li>
                                 <li class="divider"></li>
-                                <? foreach(Project::find()->all() as $v): ?>
+                                <? foreach($this->context->module->availableProjects as $v): ?>
                                     <li class="dropdown-header"><?= $v->title ?></li>
                                     <li>
                                         <ul>
-                                            <li><a href="<?= Yii::$app->urlManager->createUrl('dashboard/project/update', array('id'=>$v->id)) ?>">Изменить</a></li>
+                                            <li><a href="<?= Yii::$app->urlManager->createUrl('dashboard/project/manage', array('id'=>$v->id)) ?>">Изменить</a></li>
+                                            <li><a href="<?= Yii::$app->urlManager->createUrl('dashboard/project/manage', array('id'=>$v->id, '#'=>'categories')) ?>"><? echo Yii::t('dashboard', 'Управление категориями') ?></a></li>
                                             <li><a href="<?= Yii::$app->urlManager->createUrl('dashboard/project/delete', array('id'=>$v->id)) ?>">Удалить</a></li>
                                         </ul>
                                     </li>

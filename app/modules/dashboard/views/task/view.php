@@ -18,14 +18,25 @@ $this->params['breadcrumbs'][] = $task->title;
 <div>
     <?= $task->description ?>
 </div>
+
+<h2><? echo Yii::t('dashboard', 'Комментарии') ?></h2>
 <? foreach($task->messages as $message): ?>
     <div class="message">
+        <div class="info">
+            <?= $message->user->username ?>, <?= $message->create_time ?>
+        </div>
         <?= $message->body ?>
     </div>
 <? endforeach; ?>
 
 <h2 class="header">Ответить</h2>
 <? $form = \yii\widgets\ActiveForm::begin() ?>
+    <? if($newMessage->hasErrors()): ?>
+    <div class="alert alert-dismissable alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <? echo $form->errorSummary($newMessage) ?>
+    </div>
+    <? endif; ?>
     <div class="form-group">
         <? echo $form->field($newMessage, 'body')->textarea(['rows'=>5]) ?>
     </div>

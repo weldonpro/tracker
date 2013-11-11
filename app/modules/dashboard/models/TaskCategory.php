@@ -29,7 +29,7 @@ class TaskCategory extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['title, description, project_id, create_time', 'required'],
+			['title, project_id, create_time', 'required'],
 			['description', 'string'],
 			['project_id', 'integer'],
 			['create_time', 'safe'],

@@ -24,9 +24,6 @@ AppAsset::register($this);
 </head>
 <body>
 	<?php $this->beginBody(); ?>
-
-
-
             <!-- Sidebar -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->

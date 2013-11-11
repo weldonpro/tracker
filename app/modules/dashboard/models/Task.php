@@ -39,7 +39,7 @@ class Task extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['title, description, category_id, status', 'required'],
+			['title, category_id, status', 'required'],
 			['description', 'string'],
             ['user_id', 'default', 'value'=>\Yii::$app->user->id],
             // todo: валидатор статуса
@@ -76,7 +76,7 @@ class Task extends \yii\db\ActiveRecord
         return $this->hasOne('app\modules\dashboard\models\TaskCategory', array('id'=>'category_id'));
     }
 
-    public function statusLabels(){
+    public static function getStatuses(){
         return [
             self::STATUS_CLOSED => \Yii::t('tracker', 'Закрыто'),
             self::STATUS_NEW => \Yii::t('tracker', 'Новая'),
@@ -88,7 +88,7 @@ class Task extends \yii\db\ActiveRecord
     }
 
     public function getStatusLabel(){
-        return $this->statusLabels()[$this->status];
+        return self::getStatuses()[$this->status];
     }
 
 	/**
@@ -96,7 +96,7 @@ class Task extends \yii\db\ActiveRecord
 	 */
 	public function getMessages()
 	{
-		return $this->hasMany(Task::className(), ['task_id' => 'id']);
+		return $this->hasMany(TaskMessage::className(), ['task_id' => 'id']);
 	}
 
     public function getProject(){

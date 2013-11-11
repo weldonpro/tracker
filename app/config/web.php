@@ -7,6 +7,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'language'=>'ru',
+    'defaultRoute'=>'dashboard/default/index',
     'modules' => [
         'dashboard' => [
             'class' => 'app\modules\dashboard\Module',
