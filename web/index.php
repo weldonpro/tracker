@@ -8,7 +8,7 @@ if(isset($_SERVER['APP_ENV'])){
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 
 require(__DIR__ . '/../vendor/autoload.php');
-require(__DIR__ . '/../vendor/yiisoft/yii2/yii/Yii.php');
+require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 
 $config = require(__DIR__ . '/../app/config/environments/'.YII_ENV.'/web.php');
 
