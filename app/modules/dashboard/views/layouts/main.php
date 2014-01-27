@@ -1,6 +1,7 @@
 <?php
 use app\config\bundles\AppAsset;
 
+use app\modules\dashboard\assets\TrackerAsset;
 use app\modules\dashboard\models\Project;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -13,6 +14,7 @@ use app\components\widgets\Alert;
  * @var $content string
  */
 AppAsset::register($this);
+TrackerAsset::register($this)
 ?>
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>

@@ -2,7 +2,7 @@
 use yii\base\Application;
 
 $config = [
-    'name'=>'Наш трекер',
+    'name'=>'Tracker',
 	'id' => 'bootstrap',
     'basePath' => dirname(__DIR__),
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',

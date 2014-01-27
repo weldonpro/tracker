@@ -1,7 +1,8 @@
 /app/runtime/*
 /vendor/*
 /web/assets/*
-/app/config/environments/*
+/app/config/environments/dev/*
+/app/config/environments/production/*
 
 .idea
 /composer.phar

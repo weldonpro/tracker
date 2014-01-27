@@ -1,7 +1,7 @@
 <?php
-use app\config\bundles\AppAsset;
+use app\assets\AppAsset;
 
-use app\models\Project;
+use app\modules\dashboard\models\Project;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;

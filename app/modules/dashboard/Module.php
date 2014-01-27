@@ -18,5 +18,6 @@ class Module extends \yii\base\Module
         }
 
         $this->availableProjects = Project::find()->all();
+
 	}
 }
