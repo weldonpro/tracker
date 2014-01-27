@@ -1,6 +1,7 @@
 <?php
 
-namespace app\models;
+namespace app\modules\dashboard\models;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "task_message".
@@ -29,8 +30,10 @@ class TaskMessage extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['task_id, user_id, body, create_time', 'required'],
+			['task_id, body', 'required'],
 			['task_id, user_id', 'integer'],
+            ['user_id', 'default', 'value'=>\Yii::$app->user->id],
+            ['create_time', 'default', 'value'=>new Expression('NOW()')],
 			['body', 'string'],
 			['create_time', 'safe']
 		];
@@ -57,4 +60,9 @@ class TaskMessage extends \yii\db\ActiveRecord
 	{
 		return $this->hasOne(Task::className(), ['id' => 'task_id']);
 	}
+
+    public function getUser()
+    {
+        return $this->hasOne(\app\models\User::className(), ['id' => 'user_id']);
+    }
 }

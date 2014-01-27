@@ -2,11 +2,12 @@
 use yii\base\Application;
 
 $config = [
-    'name'=>'Наш трекер',
+    'name'=>'Tracker',
 	'id' => 'bootstrap',
     'basePath' => dirname(__DIR__),
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'language'=>'ru',
+    'defaultRoute'=>'dashboard/default/index',
     'modules' => [
         'dashboard' => [
             'class' => 'app\modules\dashboard\Module',
@@ -31,11 +32,9 @@ $config = [
                 ],
             ],
         ],
-		'cache' => [
-			'class' => 'yii\caching\FileCache',
-		],
 		'user' => [
 			'identityClass' => 'app\models\User',
+            'enableAutoLogin' => true
 		],
 		'errorHandler' => [
 			'errorAction' => 'site/error',

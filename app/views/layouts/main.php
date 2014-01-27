@@ -1,7 +1,7 @@
 <?php
-use app\config\bundles\AppAsset;
+use app\assets\AppAsset;
 
-use app\models\Project;
+use app\modules\dashboard\models\Project;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
@@ -24,9 +24,6 @@ AppAsset::register($this);
 </head>
 <body>
 	<?php $this->beginBody(); ?>
-
-
-
             <!-- Sidebar -->
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
