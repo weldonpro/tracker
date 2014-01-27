@@ -9,6 +9,7 @@ use app\modules\dashboard\models\search\TaskSearch;
 use app\modules\dashboard\models\Task;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\web\VerbFilter;
@@ -67,7 +68,7 @@ class ProjectController extends Controller
         if($categoryModel->load($_POST)){
             $categoryModel->project_id = $id;
             if($categoryModel->save()){
-                $this->refresh('categories');
+                $this->refresh('#categories');
             }
         }
 
@@ -75,7 +76,7 @@ class ProjectController extends Controller
             'query' => $query,
         ]);
 
-		if ($model->load($_POST) && $model->save()) {
+		if ($model->load($_POST) && $model->save() && !$categoryModel->hasErrors()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
 			return $this->render('form', [

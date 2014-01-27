@@ -42,7 +42,7 @@ use yii\grid\GridView;
                 <div id="categoryForm" class="panel-collapse collapse">
                     <div class="panel-body">
                         <?php $form = ActiveForm::begin(); ?>
-
+                        <?= $form->errorSummary($categoryModel) ?>
                         <?= $form->field($categoryModel, 'title')->textInput(['maxlength' => 512]) ?>
 
                         <?= $form->field($categoryModel, 'description')->textarea(['rows' => 6]) ?>
