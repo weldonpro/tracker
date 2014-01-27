@@ -4,6 +4,7 @@ namespace app\modules\dashboard\controllers;
 
 use app\modules\dashboard\models\TaskCategory;
 use app\modules\dashboard\models\Project;
+use app\modules\dashboard\models\ProjectUser;
 use app\modules\dashboard\models\search\ProjectSearch;
 use app\modules\dashboard\models\search\TaskSearch;
 use app\modules\dashboard\models\Task;
@@ -56,27 +57,42 @@ class ProjectController extends Controller
         }
 
 
+        // Categories
         $query = TaskCategory::find()->where(array('project_id'=>$id));
         $categoryModel = new TaskCategory;
 
         if($categoryModel->load($_POST)){
             $categoryModel->project_id = $id;
-            if($categoryModel->save()){
-                $this->refresh('#categories');
-            }
+            $categoryModel->save();
         }
 
         $categoriesDataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-		if ($model->load($_POST) && $model->save() && !$categoryModel->hasErrors()) {
+
+        // Users
+        $userQuery = ProjectUser::find()->with('user')->where(array('project_id'=>$id));
+        $userModel = new ProjectUser;
+
+        if($userModel->load($_POST)){
+            $userModel->project_id = $id;
+            $userModel->save();
+        }
+
+        $usersDataProvider = new ActiveDataProvider([
+            'query' => $userQuery,
+        ]);
+
+		if (\Yii::$app->request->isPost && !$model->hasErrors() && !$categoryModel->hasErrors() && !$userModel->hasErrors()) {
 			return $this->redirect(['view', 'id' => $model->id]);
 		} else {
 			return $this->render('form', [
 				'model' => $model,
                 'categoryModel'=>$categoryModel,
-                'categoriesDataProvider'=>$categoriesDataProvider
+                'categoriesDataProvider'=>$categoriesDataProvider,
+                'userModel'=>$userModel,
+                'usersDataProvider'=>$usersDataProvider,
 			]);
 		}
 	}

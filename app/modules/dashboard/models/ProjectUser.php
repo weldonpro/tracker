@@ -1,6 +1,7 @@
 <?php
 
 namespace app\modules\dashboard\models;
+use app\models\User;
 
 /**
  * This is the model class for table "project_user".
@@ -44,6 +45,12 @@ class ProjectUser extends \yii\db\ActiveRecord
 			'role' => 'Role',
 		];
 	}
+
+    public static function getRoles(){
+        return array(
+            0=>\Yii::t('dashboard', 'User')
+        );
+    }
 
 	/**
 	 * @return \yii\db\ActiveRelation

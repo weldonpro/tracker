@@ -1,8 +1,11 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\grid\GridView;
+use app\modules\dashboard\models\ProjectUser;
+use app\models\User;
 
 /**
  * @var yii\base\View $this
@@ -77,13 +80,13 @@ use yii\grid\GridView;
                         </a>
                     </h4>
                 </div>
-                <div id="categoryForm" class="panel-collapse collapse">
+                <div id="userForm" class="panel-collapse collapse">
                     <div class="panel-body">
                         <?php $form = ActiveForm::begin(); ?>
 
-                        <?= $form->field($userModel, 'user_id')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'username')) ?>
+                        <?= $form->field($userModel, 'user_id')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'username'), ['prompt'=>'']) ?>
 
-                        <?= $form->field($userModel, 'role')->dropDownList(ProjectUser::getRoles()) ?>
+                        <?= $form->field($userModel, 'role')->dropDownList(ProjectUser::getRoles(), ['prompt'=>'']) ?>
 
                         <div class="form-group">
                             <?= Html::submitButton(Yii::t('dashboard', 'Save'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -94,9 +97,9 @@ use yii\grid\GridView;
                 </div>
             </div>
             <?php echo GridView::widget([
-                'dataProvider' => $userDataProvider,
+                'dataProvider' => $usersDataProvider,
                 'columns' => [
-                    'username',
+                    'user.username',
                     'role',
                     #['class' => 'yii\grid\ActionColumn'],
                 ],
