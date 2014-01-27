@@ -1,5 +1,5 @@
 <?php
-use app\config\bundles\AppAsset;
+use app\assets\AppAsset;
 
 use app\modules\dashboard\assets\TrackerAsset;
 use app\modules\dashboard\models\Project;
