@@ -7,7 +7,7 @@ return BaseArrayHelper::merge(require(dirname(dirname(__DIR__)).DIRECTORY_SEPARA
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=dev-server;dbname=tracker_db',
             'username' => 'root',
-            'password' => 'root',
+            'password' => '',
             'charset' => 'utf8',
         ],
         'cache' => [

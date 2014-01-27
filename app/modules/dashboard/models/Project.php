@@ -1,6 +1,7 @@
 <?php
 
 namespace app\modules\dashboard\models;
+
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 
@@ -80,7 +81,7 @@ class Project extends \yii\db\ActiveRecord
 	 */
 	public function getProjectUsers()
 	{
-		return $this->hasMany(Project::className(), ['project_id' => 'id']);
+		return $this->hasMany(ProjectUser::className(), ['project_id' => 'id']);
 	}
 
 	/**

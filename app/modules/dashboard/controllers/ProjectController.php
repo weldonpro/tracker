@@ -38,16 +38,6 @@ class ProjectController extends Controller
 	}
 
 	/**
-	 * Displays a single Project model.
-	 * @param integer $id
-	 * @return mixed
-	 */
-	public function actionView($id)
-	{
-
-	}
-
-	/**
 	 * Creates a new Project model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 * @return mixed
@@ -60,8 +50,12 @@ class ProjectController extends Controller
             $model = $this->findModel($id);
         }
 
-        $query = TaskCategory::find()->where(array('project_id'=>$id));
+        if ($model->load($_POST)) {
+            $model->save();
+        }
 
+
+        $query = TaskCategory::find()->where(array('project_id'=>$id));
         $categoryModel = new TaskCategory;
 
         if($categoryModel->load($_POST)){

@@ -18,7 +18,10 @@ class Module extends \yii\base\Module
             \Yii::$app->response->send();
         }
 
-        $this->availableProjects = Project::find()->all();
+        $this->availableProjects = Project::find()
+            ->joinWith('projectUsers')
+            ->where(['project_user.user_id' => \Yii::$app->user->id])
+            ->all();
 
 	}
 }
