@@ -15,6 +15,7 @@ class Module extends \yii\base\Module
 	{
         if(\Yii::$app->user->isGuest){
             \Yii::$app->user->loginRequired();
+            \Yii::$app->response->send();
         }
 
         $this->availableProjects = Project::find()->all();

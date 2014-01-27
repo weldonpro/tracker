@@ -1,6 +1,7 @@
 <?php
 
 namespace app\modules\dashboard\models;
+use yii\db\ActiveRecord;
 use yii\db\Expression;
 
 /**
@@ -33,11 +34,11 @@ class Project extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['title, description', 'required'],
+			[['title', 'description'], 'required'],
 			['description', 'string'],
             ['user_id', 'default', 'value'=>\Yii::$app->user->id],
 			['user_id', 'integer'],
-			['create_time, update_time', 'safe'],
+            [['create_time', 'update_time'], 'safe'],
 			['title', 'string', 'max' => 512]
 		];
 	}
@@ -59,7 +60,10 @@ class Project extends \yii\db\ActiveRecord
 
     public function behaviors(){
         return array(
-            'timestamp' => ['class' => 'yii\behaviors\AutoTimestamp', 'timestamp'=>new Expression('NOW()')],
+            'timestamp' => ['class' => 'yii\behaviors\AutoTimestamp', 'timestamp'=>new Expression('NOW()'), 'attributes' => [
+                ActiveRecord::EVENT_BEFORE_INSERT => 'create_time',
+                ActiveRecord::EVENT_BEFORE_UPDATE => 'update_time',
+            ]],
         );
     }
 

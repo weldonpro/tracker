@@ -1,8 +1,8 @@
 /app/runtime/*
 /vendor/*
 /web/assets/*
-/app/config/environments/dev/*
-/app/config/environments/production/*
+/app/config/environments/*
+!/app/config/environments/*.sample.php
 
 .idea
 /composer.phar

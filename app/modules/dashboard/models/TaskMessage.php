@@ -30,8 +30,8 @@ class TaskMessage extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['task_id, body', 'required'],
-			['task_id, user_id', 'integer'],
+			[['task_id', 'body'], 'required'],
+			[['task_id', 'user_id'], 'integer'],
             ['user_id', 'default', 'value'=>\Yii::$app->user->id],
             ['create_time', 'default', 'value'=>new Expression('NOW()')],
 			['body', 'string'],

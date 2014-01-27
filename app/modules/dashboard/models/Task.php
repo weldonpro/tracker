@@ -41,12 +41,12 @@ class Task extends ActiveRecord
 	public function rules()
 	{
 		return [
-			['title, category_id, status', 'required'],
+			[['title', 'category_id', 'status'], 'required'],
 			['description', 'string'],
             ['user_id', 'default', 'value'=>\Yii::$app->user->id],
             // todo: валидатор статуса
-			['category_id, user_id, status', 'integer'],
-			['create_time, update_time', 'safe'],
+			[['category_id', 'user_id', 'status'], 'integer'],
+			[['create_time', 'update_time'], 'safe'],
 			['title', 'string', 'max' => 512],
 		];
 	}
@@ -74,7 +74,7 @@ class Task extends ActiveRecord
                 'class' => 'yii\behaviors\AutoTimestamp',
                 'timestamp'=>new Expression('NOW()'),
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['create_time', 'update_time'],
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'create_time',
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'update_time',
                 ]
             ],

@@ -48,6 +48,11 @@ $config = [
 				],
 			],
 		],
+        'urlManager' => [
+            'class' => '\yii\web\UrlManager',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
 	],
     'on beforeRequest'=>['app\components\events\BeforeRequestHandler', 'handle'],
 	'params' => require(__DIR__ . '/params.php'),

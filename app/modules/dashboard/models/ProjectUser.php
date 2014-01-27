@@ -28,8 +28,8 @@ class ProjectUser extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			['project_id, user_id, role', 'required'],
-			['project_id, user_id, role', 'integer']
+			[['project_id', 'user_id', 'role'], 'required'],
+			[['project_id', 'user_id', 'role'], 'integer']
 		];
 	}
 
