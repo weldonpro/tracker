@@ -1,6 +1,7 @@
 <?php
 
 namespace app\modules\dashboard\models;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "task_category".
@@ -29,13 +30,21 @@ class TaskCategory extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['title', 'project_id', 'create_time'], 'required'],
+			[['title', 'project_id'], 'required'],
 			['description', 'string'],
 			['project_id', 'integer'],
 			['create_time', 'safe'],
 			['title', 'string', 'max' => 512]
 		];
 	}
+
+    public function behaviors(){
+        return array(
+            'timestamp' => ['class' => 'yii\behaviors\AutoTimestamp', 'attributes' => [
+                ActiveRecord::EVENT_BEFORE_INSERT => 'create_time',
+            ]],
+        );
+    }
 
 	/**
 	 * @inheritdoc
